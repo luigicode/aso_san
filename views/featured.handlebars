@@ -1,0 +1,22 @@
+<section class="gigs-container">
+
+    <div class="gigs-grid">
+        {{#each featured}}
+        <div class="featured">
+            <h3>{{title}}</h3>
+            <p> {{description}} </p>
+            <ul>
+                <li id="price">{{price}}</li>
+                <li><a href="mailto:{{contact_email}}" class="btn btn-featured">email</a></li>
+            </ul>
+            <div class="tech">
+                <small> dog breeds: <span>{{dog_breeder}}</span></small>
+            </div>
+            <img src="{{image}}" class="gigs-image">
+        </div>
+        {{else}}
+        <p>No gigs featured</p>
+        {{/each}}
+    </div>
+
+</section>

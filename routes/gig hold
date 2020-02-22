@@ -1,0 +1,86 @@
+const Breeder = require("../models/Breeder");
+const Sequelize = require("sequelize");
+const db = require("../config/database");
+const express = require("express");
+const router = express.Router();
+const Op = Sequelize.Op;
+
+// Get gig list
+router.get("/", (req, res) =>
+  Breeder.findAll()
+    .then(breeder =>
+      res.render("breeder", {
+        breeder
+      })
+    )
+    .catch(err => console.log(err))
+);
+
+// Display blog gig form
+router.get("/main", (req, res) => res.render("blog"));
+
+// blog a gig
+router.post("/main", (req, res) => {
+  let { title, dog, budget, description, contact_email } = req.body;
+  let errors = [];
+
+  // Validate Fields
+  if (!title) {
+    errors.push({ text: "Please add a title" });
+  }
+  if (!dog) {
+    errors.push({ text: "Please add some technologies" });
+  }
+  if (!description) {
+    errors.push({ text: "Please add a description" });
+  }
+  if (!contact_email) {
+    errors.push({ text: "Please add a contact email" });
+  }
+
+  // Check for errors
+  if (errors.length > 0) {
+    res.render("/main", {
+      errors,
+      title,
+      dog,
+      budget,
+      description,
+      contact_email
+    });
+  } else {
+    if (!budget) {
+      budget = "Unknown";
+    } else {
+      budget = `$${budget}`;
+    }
+
+    // Make lowercase and remove space after comma
+    dog = dog.toLowerCase().replace(/, /g, ",");
+
+    // Insert into table
+    Breeder.create({
+      title,
+      dog,
+      description,
+      budget,
+      contact_email
+    })
+      .then(breeder => res.redirect("/breeder"))
+      .catch(err => console.log(err));
+  }
+});
+
+// Search for breeders
+router.get("/search", (req, res) => {
+  let { term } = req.query;
+
+  // Make lowercase
+  term = term.toLowerCase();
+
+  Breeder.findAll({ where: { dog: { [Op.like]: "%" + term + "%" } } })
+    .then(breeder => res.render("breeder", { breeder }))
+    .catch(err => console.log(err));
+});
+
+module.exports = router;

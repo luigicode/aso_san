@@ -1,0 +1,22 @@
+<section class="gigs-container">
+
+    <div class="gigs-grid">
+        {{#each gigs}}
+        <div class="gigs">
+            <h3>{{title}}</h3>
+            <p> {{description}} </p>
+            <img src="{{image}}" class="gigs-image">
+            <ul>
+                <li id="price">{{price}}</li>
+                <li><a href="mailto:{{contact_email}}" class="btn btn-reverse">email</a></li>
+            </ul>
+            <div class="tech">
+                <small> dog breeds: <span>{{dog_breeder}}</span></small>
+            </div>
+        </div>
+        {{else}}
+        <p>No gigs available</p>
+        {{/each}}
+    </div>
+
+</section>
