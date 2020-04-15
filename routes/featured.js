@@ -9,12 +9,12 @@ const Op = Sequelize.Op;
 //featured list
 router.get("/", (req, res) =>
   Featured.findAll()
-    .then(featured =>
+    .then((featured) =>
       res.render("featured", {
-        featured
+        featured,
       })
     )
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
 );
 
 module.exports = router;

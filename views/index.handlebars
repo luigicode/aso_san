@@ -3,9 +3,20 @@
     <h1>Lorem, ipsum.</h1>
     <form action="/gigs/search" class="search-form">
         <i class="fas fa-search"></i>
-        <input type="search" name="term" placeholder="Find a dog breeder" autocomplete="off">
-        <input type="submit" value="Search">
+        <input type="search" id="Input" name="term" placeholder="Find a dog breeder" autocomplete="off">
+        <input type="submit" value="Search" onkeyup="searchFunction">
     </form>
+
+
+    <ul id="searchUL">
+        <li><a href="#">pug</a></li>
+        <li><a href="#">poodle, puppy</a></li>
+        <li><a href="#">Bruh</a></li>
+        <li><a href="#">Bob</a></li>
+        <li><a href="#">Calvin</a></li>
+        <li><a href="#">Christina</a></li>
+        <li><a href="#">Cindy</a></li>
+    </ul>
 
 </section>
 

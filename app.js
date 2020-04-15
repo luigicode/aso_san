@@ -27,13 +27,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // Index route
 app.get("/", (req, res) => res.render("index", { layout: "landing" }));
 
-// Featured route
-//app.get("/featured", (req, res) =>
-//  res.render("featured", { layout: "feature" })
-//);
-
-
-
 // Gig routes
 app.use("/gigs", require("./routes/gigs"));
 app.use("/featured", require("./routes/featured"));
